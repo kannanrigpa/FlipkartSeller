@@ -7,10 +7,10 @@ Gem::Specification.new do |spec|
   spec.name          = "FlipkartSeller"
   spec.version       = FlipkartSeller::VERSION
   spec.authors       = ["Atish Kumar Sahoo"]
-  spec.email         = ["atish.sahoo@ajatus.co.in"]
+  spec.email         = ["atish90@gmail.com"]
 
-  spec.summary       = %q{TODO: Write a short summary, because Rubygems requires one.}
-  spec.description   = %q{TODO: Write a longer description or delete this line.}
+  spec.summary       = "A flipkart seller can do all the seller activities like update product info, search orders, print shipping labels and invoices, and manage orders at different stages of the order lifecycle etc using this gem."
+  spec.description   = "The Flipkart Marketplace Seller Platform allows sellers to register their businesses, sell products, and manage various aspects related to the products and orders. This section familiarizes you with the key business processes and system concepts in the Marketplace."
   spec.homepage      = "https://AtishSahoo@gitlab.com/AtishSahoo/FlipkartSeller.git"
   spec.license       = "MIT"
 
