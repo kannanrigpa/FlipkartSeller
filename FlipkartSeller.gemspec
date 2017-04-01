@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = "A flipkart seller can do all the seller activities like update product info, search orders, print shipping labels and invoices, and manage orders at different stages of the order lifecycle etc using this gem."
   spec.description   = "The Flipkart Marketplace Seller Platform allows sellers to register their businesses, sell products, and manage various aspects related to the products and orders. This section familiarizes you with the key business processes and system concepts in the Marketplace."
-  spec.homepage      = "https://AtishSahoo@gitlab.com/AtishSahoo/FlipkartSeller"
+  spec.homepage      = "https://gitlab.com/AtishSahoo/FlipkartSeller"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
