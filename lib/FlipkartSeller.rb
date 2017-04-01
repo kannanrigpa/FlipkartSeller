@@ -1,5 +1,6 @@
 require "FlipkartSeller/version"
 require "FlipkartSeller/order"
+require "FlipkartSeller/product"
 require "FlipkartSeller/base"
 require "FlipkartSeller/client"
 
