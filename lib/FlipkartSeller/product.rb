@@ -52,7 +52,7 @@ module FlipkartSeller
 
 			  response = RestClient::Request.execute(
                 		:method => :post,
-                		:url => "#{BASE_URL}/sellers/skus/listings/bulk",
+                		:url => "#{@base_url}/sellers/skus/listings/bulk",
                 		:headers => {'Authorization' => 'Bearer ' + @access_token, :content_type => 'application/json'},
                 		:payload=> "#{data.to_json}"
               			)
