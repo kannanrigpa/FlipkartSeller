@@ -11,15 +11,31 @@ module FlipkartSeller
                 		:headers => {'Authorization' => 'Bearer ' + @access_token, :content_type => 'application/json'}
               			)
 
-              if response.code == 200
-                response_data =  JSON.parse(response.body)
+        if response.code == 200
+          response_data =  JSON.parse(response.body)
+          return response_data
+        end
 
-                return response_data
-              end
+      rescue RestClient::Unauthorized, RestClient::Forbidden => e
+        
+        raise Forbidden.new(e.response)
 
-            rescue Exception => e
-            	Rails.logger.error e.message
-            end
+      rescue RestClient::ExceptionWithResponse => e
+        case e.response.code
+          when 400
+            raise BadRequest.new(e.response)
+          when 403
+            raise Forbidden.new(e.response)
+          when 404
+            raise NotFound.new(e.response)
+          when 500
+            raise InternalServerError.new(e.response)
+          when 503
+            raise ServiceUnavailable.new(e.response)
+          when 599
+            raise ConnectionTimedOut.new(e.response)
+          end
+      end
 
 		end
 
