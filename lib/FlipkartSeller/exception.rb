@@ -1,17 +1,53 @@
 module FlipkartSeller
 
-  class Exception < StandardError; end
+  class Exception < StandardError 
+	attr_reader :response
 
-  class BadRequest < Exception; end #for 400 response
+    def initialize(response)
+      @response = response
+    end
+  end
 
-  class Forbidden < Exception; end #for 403 response
+  #for 400 response
+  class BadRequest < Exception
+  	def initialize(response)
+      super(response)
+    end
+  end 
 
-  class NotFound < Exception; end #for 404 response
+  #for 403 response
+  class Forbidden < Exception
+  	def initialize(response)
+      super(response)
+    end
+  end
 
-  class InternalServerError < Exception; end # for 500 response
+  #for 404 response
+  class NotFound < Exception
+  	def initialize(response)
+      super(response)
+    end
+  end
 
-  class ServiceUnavailable < Exception; end # for 503 response
+  # for 500 response
+  class InternalServerError < Exception
+  	def initialize(response)
+      super(response)
+    end
+  end
 
-  class ConnectionTimedOut < Exception; end # for 599 response
+  # for 503 response
+  class ServiceUnavailable < Exception
+  	def initialize(response)
+      super(response)
+    end
+  end
+
+  # for 599 response
+  class ConnectionTimedOut < Exception
+  	def initialize(response)
+      super(response)
+    end
+  end 
   
 end

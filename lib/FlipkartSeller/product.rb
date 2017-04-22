@@ -18,22 +18,22 @@ module FlipkartSeller
 
       rescue RestClient::Unauthorized, RestClient::Forbidden => e
         
-        raise Forbidden.new(e.response)
+        raise Forbidden.new(e.response), e.message
 
       rescue RestClient::ExceptionWithResponse => e
         case e.response.code
           when 400
-            raise BadRequest.new(e.response)
+            raise BadRequest.new(e.response), e.message
           when 403
-            raise Forbidden.new(e.response)
+            raise Forbidden.new(e.response), e.message
           when 404
-            raise NotFound.new(e.response)
+            raise NotFound.new(e.response), e.message
           when 500
-            raise InternalServerError.new(e.response)
+            raise InternalServerError.new(e.response), e.message
           when 503
-            raise ServiceUnavailable.new(e.response)
+            raise ServiceUnavailable.new(e.response), e.message
           when 599
-            raise ConnectionTimedOut.new(e.response)
+            raise ConnectionTimedOut.new(e.response), e.message
           end
       end
 
