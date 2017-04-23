@@ -11,31 +11,36 @@ module FlipkartSeller
                 		:headers => {'Authorization' => 'Bearer ' + @access_token, :content_type => 'application/json'}
               			)
 
-        if response.code == 200
-          response_data =  JSON.parse(response.body)
-          return response_data
-        end
+        response_data =  JSON.parse(response.body)
+        return response_data
 
-      rescue RestClient::Unauthorized, RestClient::Forbidden => e
-        
-        raise Forbidden.new(e.response), e.message
 
       rescue RestClient::ExceptionWithResponse => e
-        case e.response.code
-          when 400
-            raise BadRequest.new(e.response), e.message
-          when 403
-            raise Forbidden.new(e.response), e.message
-          when 404
-            raise NotFound.new(e.response), e.message
-          when 500
-            raise InternalServerError.new(e.response), e.message
-          when 503
-            raise ServiceUnavailable.new(e.response), e.message
-          when 599
-            raise ConnectionTimedOut.new(e.response), e.message
-          end
-      end
+        raise StandardException.new if e.response.blank?
+
+        if e.response.code.present? && [400,403,404,500,503,599].include?(e.response.code)
+          case e.response.code
+            when 400
+              raise BadRequest.new(e.response), e.message
+            when 403
+              raise Forbidden.new(e.response), e.message
+            when 404
+              raise NotFound.new(e.response), e.message
+            when 500
+              raise InternalServerError.new(e.response), e.message
+            when 503
+              raise ServiceUnavailable.new(e.response), e.message
+            when 599
+              raise ConnectionTimedOut.new(e.response), e.message
+            else
+              raise OtherException.new(e.response), e.message
+            end
+        else
+          raise OtherException.new(e.response), e.message
+        end
+      rescue Exception => e
+          raise StandardException.new
+      end 
 
 		end
 
@@ -73,15 +78,36 @@ module FlipkartSeller
                 		:payload=> "#{data.to_json}"
               			)
 
-              if response.code == 200
-                response_data =  JSON.parse(response.body)
+        response_data =  JSON.parse(response.body)
 
-                return response_data
-              end
+        return response_data
 
-            rescue Exception => e
-            	Rails.logger.error e.message
+      rescue RestClient::ExceptionWithResponse => e
+        raise StandardException.new if e.response.blank?
+
+        if e.response.code.present? && [400,403,404,500,503,599].include?(e.response.code)
+          case e.response.code
+            when 400
+              raise BadRequest.new(e.response), e.message
+            when 403
+              raise Forbidden.new(e.response), e.message
+            when 404
+              raise NotFound.new(e.response), e.message
+            when 500
+              raise InternalServerError.new(e.response), e.message
+            when 503
+              raise ServiceUnavailable.new(e.response), e.message
+            when 599
+              raise ConnectionTimedOut.new(e.response), e.message
+            else
+              raise OtherException.new(e.response), e.message
             end
+        else
+          raise OtherException.new(e.response), e.message
+        end
+      rescue Exception => e
+          raise StandardException.new
+      end 
 
 		end
 	end

@@ -1,5 +1,6 @@
 module FlipkartSeller
-
+  
+  class StandardException < StandardError; end
   class Exception < StandardError 
 	attr_reader :response
 
@@ -46,6 +47,12 @@ module FlipkartSeller
   # for 599 response
   class ConnectionTimedOut < Exception
   	def initialize(response)
+      super(response)
+    end
+  end
+
+  class OtherException < Exception
+    def initialize(response)
       super(response)
     end
   end 
