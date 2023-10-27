@@ -1,6 +1,6 @@
 module FlipkartSeller
 	class Client < Base
-		
+
 		def initialize(client_id,client_secret,environment= :production)
 
 			return false unless [:production,:sandbox].include?(environment)
@@ -11,12 +11,12 @@ module FlipkartSeller
 		      @base_url = @environment.eql?(:production) ? PRODUCTION_BASE_URL : SANDBOX_BASE_URL
 
 	          response = RestClient::Request.execute(
-	                  method: :get, 
+	                  method: :get,
 	                  url: "#{@base_url}/oauth-service/oauth/token",
 	                  user: client_id,
-	                  password:client_secret, 
+	                  password:client_secret,
 	                  timeout: 10,
-	                  headers: {params: {:grant_type=> "client_credentials", :scope=> "Seller_Api"}}
+	                  headers: {params: {:grant_type=> "client_credentials", :scope=> "Seller_Api,Default"}}
 	                  )
 
 	            response_hash =  JSON.parse(response.body)
