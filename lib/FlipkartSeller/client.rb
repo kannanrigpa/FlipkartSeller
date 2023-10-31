@@ -16,7 +16,7 @@ module FlipkartSeller
 	                  user: client_id,
 	                  password:client_secret,
 	                  timeout: 10,
-	                  headers: {params: {:grant_type=> "client_credentials", :scope=> "Seller_Api,Default"}}
+	                  headers: {params: {:grant_type=> "client_credentials", :scope=> "Seller_Api"}}
 	                  )
 
 	            response_hash =  JSON.parse(response.body)
