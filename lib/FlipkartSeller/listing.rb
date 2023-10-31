@@ -44,7 +44,7 @@ module FlipkartSeller
 
 		end
 
-		def update_price(data)
+		def update_prices(data)
 
 			begin
 
@@ -67,7 +67,7 @@ module FlipkartSeller
 
 		end
 
-		def update_products(data)
+		def update_listings(data)
 
 			begin
 
