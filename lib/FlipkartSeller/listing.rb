@@ -4,11 +4,10 @@ module FlipkartSeller
 		def get_listings(sku_ids)
 
 			begin
-				url = "#{@base_url}/sellers/listings/v3/#{sku_ids.join(',')}"
-        uri = URI.parse(url)
+				
 			  response = RestClient::Request.execute(
                 		:method => :get,
-                		:url => uri,
+                		:url => "#{@base_url}/sellers/listings/v3/#{sku_ids.join(',')}",
                 		:headers => {'Authorization' => 'Bearer ' + @access_token, :content_type => 'application/json'}
               			)
 
